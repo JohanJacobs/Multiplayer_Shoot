@@ -9,7 +9,7 @@ public class ShootController : NetworkBehaviour
     float lastShot;
 
     [SerializeField] GameObject bulletPrefab;
-
+    private float bulletOffset = 1.5f;
 
 
     public override void OnNetworkSpawn()
@@ -55,7 +55,7 @@ public class ShootController : NetworkBehaviour
     private void CreateBulletServerRpc(Vector3 shootDirection)
     {
         // create the bullet         
-        var networkBullet = Instantiate(bulletPrefab, transform.position + shootDirection * 1, Quaternion.identity);
+        var networkBullet = Instantiate(bulletPrefab, transform.position + shootDirection * bulletOffset, Quaternion.identity);
         if (!networkBullet)
             Debug.LogError("Failed to create networked bullet!");
 
