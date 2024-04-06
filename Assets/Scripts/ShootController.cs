@@ -1,25 +1,30 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using Unity.Netcode;
+using System;
 
 
-public class ShootController : MonoBehaviour
+public class ShootController : NetworkBehaviour
 {
     [SerializeField] float timeBetweenShorts;
     float lastShot;
 
     [SerializeField] GameObject bulletPrefab;
 
-    private void Awake()
+
+
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
         lastShot = 0;
         if (bulletPrefab == null ) {
             Debug.LogError("Bullet prefab not assigned in player!");
         }
     }
 
-
     private void Update()
     {
+        if (!IsOwner) return;
+
         if (CanShoot() && Utils.IsMouseButtonDown(0))
             Shoot();
     }
@@ -33,18 +38,8 @@ public class ShootController : MonoBehaviour
     {
         // Get the direction to shoot
         var shootDirection = GetShootDirection();
-        CreateBullet(shootDirection);
+        CreateBulletServerRpc(shootDirection);
         lastShot = Time.time;   
-    }
-
-    private void CreateBullet(Vector3 shootDirection)
-    {
-        // create the bullet         
-        var bullet = Instantiate(bulletPrefab, transform.position + shootDirection * 1, Quaternion.identity);
-
-        // set the direction of the bullet
-        BulletController bc = bullet.GetComponent<BulletController>();
-        bc.SetDirection(shootDirection);
     }
 
     private Vector3 GetShootDirection()
@@ -53,7 +48,22 @@ public class ShootController : MonoBehaviour
         var v =  mousePos - transform.position;
         v.z = 0;
 
-        Debug.Log(v);
         return v.normalized;
+    }
+
+    [ServerRpc]
+    private void CreateBulletServerRpc(Vector3 shootDirection)
+    {
+        // create the bullet         
+        var networkBullet = Instantiate(bulletPrefab, transform.position + shootDirection * 1, Quaternion.identity);
+        if (!networkBullet)
+            Debug.LogError("Failed to create networked bullet!");
+
+        var bulletNetworkObject  = networkBullet.GetComponent<NetworkObject>();
+        bulletNetworkObject.Spawn();
+
+        // set the direction of the bullet        
+        BulletController bc = networkBullet.GetComponent<BulletController>();
+        bc.SetDirection(shootDirection);
     }
 }

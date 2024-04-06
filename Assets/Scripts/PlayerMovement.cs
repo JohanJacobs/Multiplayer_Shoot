@@ -1,11 +1,19 @@
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     [SerializeField] private float speed;
 
+    public override void OnNetworkSpawn()
+    {
+
+    }
+
     private void Update()
     {
+        if (!IsOwner) return;
+
         var moveVector = GetMoveVector();
         MoveInDirection(moveVector);
     }

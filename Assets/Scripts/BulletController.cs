@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BulletController : MonoBehaviour
+public class BulletController : NetworkBehaviour
 {
     [SerializeField] float speed;
     [SerializeField] float timeToLife;
@@ -11,12 +12,15 @@ public class BulletController : MonoBehaviour
     private Vector3 directionVector;
     private bool bulletIntitialized;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
+        base.OnNetworkSpawn();
+
         bulletIntitialized = false;
         directionVector = Vector3.zero;
         currentLifetime = 0;
     }
+
     public void SetDirection(Vector3 directionVector)
     {
         this.directionVector = directionVector;
@@ -27,6 +31,8 @@ public class BulletController : MonoBehaviour
 
     private void Update()
     {
+        if (!IsServer) return;
+
         if (!bulletIntitialized)
             return;
 
