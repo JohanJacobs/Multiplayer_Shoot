@@ -1026,7 +1026,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1261746034}
   - component: {fileID: 1261746033}
-  - component: {fileID: 1261746032}
   - component: {fileID: 1261746035}
   - component: {fileID: 1261746036}
   m_Layer: 0
@@ -1036,18 +1035,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1261746032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1261746031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be67d1a1234e53547819b73208d35263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1261746033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,7 +1050,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1261746036}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 4256380498834834763, guid: 0c02c5e92fe17054fb40cd546521f93a, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: 0c6086538d841de40af3e723efa81cb2, type: 2}
