@@ -52,6 +52,9 @@ public class BulletController : NetworkBehaviour
         currentLifetime += Time.deltaTime;
 
         if (currentLifetime > timeToLife)
-            GameObject.Destroy(transform.gameObject);
+        {
+            //GameObject.Destroy(transform.gameObject);
+            NetworkManager.Destroy(gameObject);
+        }
     }
 }
