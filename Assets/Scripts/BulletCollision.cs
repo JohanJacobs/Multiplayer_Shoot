@@ -1,15 +1,18 @@
 using UnityEngine;
 using Unity.Netcode;
 
+
 public class BulletCollision : NetworkBehaviour
 {
     private int bulletHits;
-
+    PlayerStats playerStats;
     private string bulletTag = "Bullet";
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
         bulletHits = 0;
+        if (!playerStats)
+            playerStats = GetComponent<PlayerStats>();
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -26,8 +29,7 @@ public class BulletCollision : NetworkBehaviour
 
     private void IncrementStats()
     {
-        bulletHits += 1;
-        Debug.Log("Received " + bulletHits + " bullet hits");        
+        playerStats.IncreaseHits(1);
     }
 
 }
