@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using Unity.Netcode;
 public class NetworkUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Button clientButton;
+    [SerializeField] private Button hostButton;
+    [SerializeField] private Button serverButton;
+    private void Awake()
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        clientButton.onClick.AddListener(() =>
+        {
+            NetworkManager.Singleton.StartClient();
+        });
+
+        hostButton.onClick.AddListener(() =>
+        {
+            NetworkManager.Singleton.StartHost();
+        });
+
+        serverButton.onClick.AddListener(() =>
+        {
+            NetworkManager.Singleton.StartServer();
+        });
     }
 }
