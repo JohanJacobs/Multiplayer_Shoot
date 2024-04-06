@@ -579,9 +579,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1202492720}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: set_name
-        m_Mode: 5
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1028,6 +1028,7 @@ GameObject:
   - component: {fileID: 1261746033}
   - component: {fileID: 1261746032}
   - component: {fileID: 1261746035}
+  - component: {fileID: 1261746036}
   m_Layer: 0
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1047,10 +1048,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be67d1a1234e53547819b73208d35263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 1202492720}
-  clientButton: {fileID: 0}
-  hostButton: {fileID: 0}
-  serverButton: {fileID: 0}
 --- !u!114 &1261746033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,7 +1062,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NetworkConfig:
     ProtocolVersion: 0
-    NetworkTransport: {fileID: 0}
+    NetworkTransport: {fileID: 1261746036}
     PlayerPrefab: {fileID: 0}
     Prefabs:
       NetworkPrefabsLists:
@@ -1119,6 +1116,33 @@ MonoBehaviour:
   clientButton: {fileID: 926563968}
   hostButton: {fileID: 1936472106}
   serverButton: {fileID: 1043045784}
+--- !u!114 &1261746036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261746031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6960e84d07fb87f47956e7a81d71c4e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ProtocolType: 0
+  m_MaxPacketQueueSize: 128
+  m_MaxPayloadSize: 6144
+  m_HeartbeatTimeoutMS: 500
+  m_ConnectTimeoutMS: 1000
+  m_MaxConnectAttempts: 60
+  m_DisconnectTimeoutMS: 30000
+  ConnectionData:
+    Address: 127.0.0.1
+    Port: 7777
+    ServerListenAddress: 127.0.0.1
+  DebugSimulator:
+    PacketDelayMS: 0
+    PacketJitterMS: 0
+    PacketDropRate: 0
 --- !u!1 &1287474446
 GameObject:
   m_ObjectHideFlags: 0
