@@ -3,14 +3,13 @@ using Unity.Netcode;
 
 
 public class BulletCollision : NetworkBehaviour
-{
-    private int bulletHits;
+{    
     PlayerStats playerStats;
     private string bulletTag = "Bullet";
     public override void OnNetworkSpawn()
     {
         base.OnNetworkSpawn();
-        bulletHits = 0;
+ 
         if (!playerStats)
             playerStats = GetComponent<PlayerStats>();
     }
@@ -31,5 +30,4 @@ public class BulletCollision : NetworkBehaviour
     {
         playerStats.IncreaseHits(1);
     }
-
 }
